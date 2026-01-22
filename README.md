@@ -14,6 +14,49 @@ Connect your LLMs to SQL databases safely and intuitively using the Model Contex
 
 ---
 
+## Usage Example
+
+Once the server is connected to your LLM (Claude, Gemini, etc.), the agent gains access to two main tools: `get_schema` and `execute_query`.
+
+### Typical Workflow
+
+1. **Exploration**: The user asks a question like: *"How many users signed up last month?"*
+2. **Schema Inspection**: The LLM automatically calls `get_schema` to understand your table names and columns.
+3. **Query Execution**: The LLM generates a SQL query and calls `execute_query`.
+4. **Natural Response**: The LLM receives the data and translates it back to you in plain English or Spanish.
+
+### Example Interaction
+
+**User:**
+
+> "List the top 3 products by total sales revenue."
+
+**LLM (Internal Thought Process):**
+
+1. Call `get_schema` to find relevant tables (finds `products` and `orders`).
+2. Generate SQL: `SELECT p.name, SUM(o.amount) FROM products p JOIN orders o ON p.id = o.product_id GROUP BY p.name ORDER BY 2 DESC LIMIT 3`.
+3. Call `execute_query` with the generated SQL.
+
+**LLM Response:**
+
+> "The top 3 products by revenue are:
+> 1. **Enterprise Subscription** ($50,200)
+> 2. **Professional License** ($32,150)
+> 3. **Basic Plan** ($12,400)"
+> 
+> 
+
+---
+
+### Available Tools
+
+| Tool | Parameters | Description |
+| --- | --- | --- |
+| `get_schema` | *(none)* | Returns a list of all tables, their columns, and data types. |
+| `execute_query` | `sql_query` | Executes a safe `SELECT` statement and returns the results as JSON. |
+
+---
+
 ## 🛠️ 1. Installation & Drivers
 
 ### Step 1: Clone the Repository
