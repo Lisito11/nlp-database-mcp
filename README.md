@@ -198,6 +198,37 @@ Add to your `claude_desktop_config.json`:
 
 ---
 
+Aquí tienes el apartado diseñado para resaltar la privacidad y la facilidad de uso con modelos locales. Puedes insertarlo justo antes de la sección de **Security**.
+
+---
+
+## Running with Local Models (100% Private)
+
+For maximum privacy, you can pair **NLP Database** with a local LLM. This ensures that your database schema and query results **never leave your machine**.
+
+### Using Ollama + Claude Desktop / OpenCode
+
+1. **Install Ollama**: Download it from [ollama.com](https://www.google.com/search?q=https://ollama.com).
+2. **Pull a Model**: Recommended models for SQL generation are `llama3.1`, `codellama`, or `qwen2.5-coder`.
+```bash
+ollama run llama3.1
+
+```
+
+3. **Configure your Client**: Point your MCP client to your local Python script as shown in the [Client Configuration](https://www.google.com/search?q=%23-3-client-configuration) section.
+4. **Select Local Model**: In your client (like OpenCode or a local-ready editor), select your Ollama endpoint (usually `http://localhost:11434`) as the provider.
+
+### Why go local?
+
+| Feature | Local Model | Cloud Model (OpenAI/Anthropic) |
+| --- | --- | --- |
+| **Data Privacy** | 🔒 **Total**. Data stays on your disk. | 🌐 Data sent to 3rd party servers. |
+| **Cost** | 💰 **Free**. Uses your own GPU/CPU. | 💳 Pay-per-token. |
+| **Internet** | 🔌 **Not required**. Works offline. | 🌐 Required. |
+| **Latency** | ⚡ Depends on your hardware. | ☁️ Depends on API response time. |
+
+---
+
 ## 🔒 Security: Dedicated Read-Only User
 
 Always use a restricted database user. Here is how to create one:
@@ -224,3 +255,14 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO nlp_readonly;
 | `DB_ECHO_SQL` | `false` | Enable to log raw SQL queries to console. |
 
 ---
+
+## 🤝 Contributing
+
+This is an open-source project and I'd love your help to make it better! Whether you are a Python expert, a Data Engineer, or just starting with MCP, your contributions are welcome.
+
+**How to help:**
+
+* Report bugs or suggest features via **Issues**.
+* Improve documentation.
+* Add support for more database engines.
+* Submit **Pull Requests** with your improvements.
